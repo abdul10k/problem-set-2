@@ -14,8 +14,6 @@ def create_directories(directories):
     Args:
         directories (list of str): A list of directory paths to create.
     """
-    
-    
     for directory in directories:
         os.makedirs(directory, exist_ok=True)
 
@@ -36,5 +34,5 @@ def extract_transform():
     # Creates two additional dataframes using groupbys
     charge_counts = arrest_events.groupby(['charge_degree']).size().reset_index(name='count')
     charge_counts_by_offense = arrest_events.groupby(['charge_degree', 'offense_category']).size().reset_index(name='count')
-    
+
     return pred_universe, arrest_events, charge_counts, charge_counts_by_offense

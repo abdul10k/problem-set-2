@@ -12,43 +12,38 @@ import src.part5_scatter as part5
 
 def main():
     ##  PART 1: ETL  ##
-    # ETL the datasets into dataframes
     directories = ['data/part2_plots', 'data/part3_plots', 'data/part4_plots', 'data/part5_plots']
     part1.create_directories(directories)
-    
     pred_universe, arrest_events, charge_counts, charge_counts_by_offense = part1.extract_transform()
-    
-    ##  PART 2: PLOT EXAMPLES  ##
-    # Apply plot theme
-    part2.seaborn_settings()
+    print("part1")
 
-    # Generate plots
+    ##  PART 2: PLOT EXAMPLES  ##
+    part2.seaborn_settings()
     part2.barplots(charge_counts, charge_counts_by_offense)
     part2.cat_plots(charge_counts, pred_universe)
     part2.histograms(pred_universe)
     part2.scatterplot(pred_universe)
+    print("part2")
 
     ##  PART 3: BAR PLOTS AND HISTOGRAMS  ##
-    # 1
-
-    # 2
-
-    # 3
-
-    # 4
+    part3.barplot_fta(pred_universe)
+    part3.barplot_fta_by_sex(pred_universe)
+    part3.histogram_age(pred_universe)
+    part3.histogram_age_binned(pred_universe)
+    print("part3")
 
     ##  PART 4: CATEGORICAL PLOTS  ##
-    # 1
-    
-    # 2
-
-    # 3
+    felony_charge = part4.generate_felony_charge_df(arrest_events)
+    merged_df = part4.merge_felony_with_universe(felony_charge, pred_universe)
+    part4.plot_felony_prediction_by_charge(merged_df)
+    part4.plot_nonfelony_prediction_by_charge(merged_df)
+    part4.plot_felony_prediction_by_charge_and_actual(merged_df)
+    print("part4")
 
     ##  PART 5: SCATTERPLOTS  ##
-    # 1
-    
-    # 2
-
+    part5.scatter_prediction_by_current_charge(merged_df)
+    part5.scatter_prediction_vs_outcome(merged_df)
+    print("part5")
 
 if __name__ == "__main__":
     main()
